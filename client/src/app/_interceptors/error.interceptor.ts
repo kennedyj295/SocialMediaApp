@@ -24,13 +24,11 @@ export class ErrorInterceptor implements HttpInterceptor {
               if (error.error.errors) {
                 const modelStateErrors = [];
                 for (const key in error.error.errors) {
-                  var sumthin = error.error.errors[key];
-                  var sumthinelse = key;
                   if (error.error.errors[key]) {
                     modelStateErrors.push(error.error.errors[key])
                   }
                 }
-                throw modelStateErrors;
+                throw modelStateErrors.flat();
               } else {
                 this.toastr.error(error.error, error.status.toString())
               }
